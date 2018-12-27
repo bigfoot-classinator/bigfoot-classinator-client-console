@@ -16,14 +16,23 @@ namespace BigfootClassinator
   {
     static void Main(string[] args)
     {
-      Console.WriteLine(ClassinateSighting().Result);
+
+      Console.WriteLine("Bigfoot Classinator");
+
+      Console.WriteLine();
+      Console.Write("Tell us about your Bigfoot sighting: ");
+
+      var sighting = Console.ReadLine();
+      var classination = ClassinateSighting(sighting).Result;
+
+      Console.WriteLine();
+      Console.WriteLine(classination);
     }
 
-    private static async Task<SightingResponse> ClassinateSighting()
+    private static async Task<string> ClassinateSighting(string sighting)
     {
       // make the request object
-      var request = new SightingRequest { Sighting = "I saw bigfoot in the woods" };
-      Console.WriteLine(request);
+      var request = new SightingRequest { Sighting = sighting };
 
       // serialize it to JSON
       DataContractJsonSerializer js = new DataContractJsonSerializer(typeof(SightingRequest));
@@ -37,8 +46,6 @@ namespace BigfootClassinator
       sr.Close();
       ms.Close();
 
-      Console.WriteLine(requestJson);
-
       // setup the http client
       HttpClient client = new HttpClient();
       client.DefaultRequestHeaders.Accept.Clear();
@@ -47,16 +54,13 @@ namespace BigfootClassinator
 
       // prepare the uri
       Uri uri = new Uri("https://bigfoot-classinator.herokuapp.com/classinate");
-      Console.WriteLine(uri);
 
       // prepare the http body
       HttpContent body = new StringContent(requestJson);
       body.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-      Console.WriteLine(body);
 
       // make the http call with the uri and the body
       HttpResponseMessage httpResponse = await client.PostAsync(uri, body);
-      Console.WriteLine(httpResponse.Content);
 
       // if the server ain't happy, nobody's happy
       if (!httpResponse.IsSuccessStatusCode) throw new Exception("HTTP Request was not successful");
@@ -65,7 +69,7 @@ namespace BigfootClassinator
       SightingResponse response = await httpResponse.Content.ReadAsAsync<SightingResponse>();
 
       // return it
-      return response;
+      return response.Classination.Selected;
     }
   }
 
