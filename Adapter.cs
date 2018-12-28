@@ -13,9 +13,9 @@ namespace BigfootClassinator
       return restResponse.Data;
     }
 
-    public ClassinationResponse Classinate(ClassinationRequest request)
+    public ClassinationResponse Classinate(ClassinationRequest classinationRequest)
     {
-      var restRequest = BuildClassinationRequest(request);
+      var restRequest = BuildClassinationRequest(classinationRequest);
       var restResponse = client.Execute<ClassinationResponse>(restRequest);
       return restResponse.Data;
     }
@@ -26,10 +26,10 @@ namespace BigfootClassinator
       return restRequest;
     }
 
-    private RestRequest BuildClassinationRequest(ClassinationRequest request)
+    private RestRequest BuildClassinationRequest(ClassinationRequest classinationRequest)
     {
       var restRequest = new RestRequest("classinate", Method.POST);
-      restRequest.AddJsonBody(request);
+      restRequest.AddJsonBody(classinationRequest);
       return restRequest;
     }
   }
