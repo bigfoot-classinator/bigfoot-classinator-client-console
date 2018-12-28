@@ -24,7 +24,7 @@ namespace BigfootClassinator
     {
       var adapter = new Adapter();
       var request = new ClassinationRequest { sighting = sighting };
-      var response = adapter.ClassinateSighting(request);
+      var response = adapter.Classinate(request);
 
       return response.classination.selected;
     }

@@ -1,10 +1,13 @@
-public class ClassinationResponse
+namespace BigfootClassinator
 {
-  public string sighting { get; set; }
-  public Classination classination { get; set; }
-
-  public override string ToString()
+  public class ClassinationResponse
   {
-    return $"{this.GetType().Name}: {this.sighting} <{this.classination.ToString()}>";
+    public string sighting { get; set; }
+    public Classination classination { get; set; }
+
+    public override string ToString()
+    {
+      return $"{this.GetType().Name}: {this.sighting} <{this.classination.ToString()}>";
+    }
   }
 }
