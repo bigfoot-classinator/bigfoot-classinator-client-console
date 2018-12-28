@@ -9,7 +9,15 @@ namespace BigfootClassinator
   {
     static void Main(string[] args)
     {
-      string s = ProcessRequests().Result;
+      var controller = new Controller();
+
+      if (args.Length == 0) {
+        controller.OnClassinate();
+      } else if (args[0] == "-v" || args[0] == "--version") {
+        controller.OnVersion();
+      } else {
+        controller.OnHelp();
+      }
     }
 
     private static async Task<string> ProcessRequests()
@@ -31,5 +39,34 @@ namespace BigfootClassinator
 
       return "foo";
     }
+  }
+
+  public class Controller
+  {
+    private Model model = new Model();
+    private View view = new View();
+
+    public void OnHelp()
+    {
+      view.DisplayHelp();
+    }
+
+    public void OnVersion()
+    {
+      var info = model.Info().Result;
+      view.DisplayVersion(info);
+    }
+
+    public void OnClassinate()
+    {
+      Console.WriteLine();
+      Console.Write("Tell us about your Bigfoot sighting: ");
+
+      var classination = model.Classinate(new Sighting() { Text = Console.ReadLine() }).Result;
+
+      view.DisplayClassinationTitles();
+      view.DisplayClassination(classination.Classination);
+    }
+
   }
 }

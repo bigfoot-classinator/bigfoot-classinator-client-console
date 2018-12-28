@@ -5,6 +5,14 @@ namespace BigfootClassinator
 {
   class View
   {
+    public void DisplayHelp()
+    {
+      Console.WriteLine("Usage: classinator [runtime-options]");
+      Console.WriteLine("--help, -h\tShow command line help.");
+      Console.WriteLine("--version, -v\tDisplay server version.");
+      Console.WriteLine();
+    }
+
     public void DisplayVersion(ApplicationInfo info)
     {
       Console.WriteLine($"{info.Name} v{info.Version}");
