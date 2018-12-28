@@ -1,7 +1,7 @@
 using System.Runtime.Serialization;
 using RestSharp.Serializers;
 
-public class SightingRequest
+public class ClassinationRequest
 {
   public string sighting { get; set; }
 

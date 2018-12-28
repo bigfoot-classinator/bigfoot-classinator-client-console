@@ -1,7 +1,6 @@
-public class SightingResponse
+public class ClassinationResponse
 {
   public string sighting { get; set; }
-
   public Classination classination { get; set; }
 
   public override string ToString()

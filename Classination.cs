@@ -1,11 +1,8 @@
 public class Classination
 {
   public double class_a { get; set; }
-
   public double class_b { get; set; }
-
   public double class_c { get; set; }
-
   public string selected { get; set; }
 
   public override string ToString()

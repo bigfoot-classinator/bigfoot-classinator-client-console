@@ -1,16 +1,5 @@
 ﻿using System;
-
 using System.IO;
-
-using System.Net.Http;
-using System.Net.Http.Headers;
-
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Json;
-
-using System.Threading.Tasks;
-
-using RestSharp;
 
 namespace BigfootClassinator
 {
@@ -33,15 +22,11 @@ namespace BigfootClassinator
 
     private static string ClassinateSighting(string sighting)
     {
-      var request = new SightingRequest { sighting = sighting };
+      var adapter = new Adapter();
+      var request = new ClassinationRequest { sighting = sighting };
+      var response = adapter.ClassinateSighting(request);
 
-      var client = new RestClient("http://bigfoot-classinator.herokuapp.com");
-      var restRequest = new RestRequest("classinate", Method.POST);
-      restRequest.AddJsonBody(request);
-
-      var restResponse = client.Execute<SightingResponse>(restRequest);
-
-      return restResponse.Data.classination.selected;
+      return response.classination.selected;
     }
   }
 }
