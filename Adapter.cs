@@ -1,36 +1,35 @@
-using RestSharp;
+using System;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace BigfootClassinator
 {
-  class Adapter
+  public class Adapter
   {
-    private RestClient client = new RestClient("http://bigfoot-classinator.herokuapp.com");
+    private static readonly HttpClient client = new HttpClient();
 
-    public InfoResponse Info()
-    {
-      var restRequest = BuildInfoRequest();
-      var restResponse = client.Execute<InfoResponse>(restRequest);
-      return restResponse.Data;
+    public Adapter() {
+      client.BaseAddress = new Uri("http://bigfoot-classinator.herokuapp.com");
+      client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
     }
 
-    public ClassinationResponse Classinate(ClassinationRequest classinationRequest)
+    public async Task<string> FetchInfo()
     {
-      var restRequest = BuildClassinationRequest(classinationRequest);
-      var restResponse = client.Execute<ClassinationResponse>(restRequest);
-      return restResponse.Data;
+      var response = await client.GetAsync("info");
+      response.EnsureSuccessStatusCode();
+      var json = await response.Content.ReadAsStringAsync();
+      return json;
     }
 
-    private RestRequest BuildInfoRequest()
+    public async Task<string> ClassinateSighting(string request)
     {
-      var restRequest = new RestRequest("info", Method.GET);
-      return restRequest;
-    }
-
-    private RestRequest BuildClassinationRequest(ClassinationRequest classinationRequest)
-    {
-      var restRequest = new RestRequest("classinate", Method.POST);
-      restRequest.AddJsonBody(classinationRequest);
-      return restRequest;
+      HttpContent content = new StringContent(request, Encoding.UTF8, "application/json");
+      var response = await client.PostAsync("classinate", content);
+      response.EnsureSuccessStatusCode();
+      var json = await response.Content.ReadAsStringAsync();
+      return json;
     }
   }
 }

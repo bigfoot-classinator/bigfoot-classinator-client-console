@@ -5,9 +5,9 @@ namespace BigfootClassinator
 {
   class View
   {
-    public void DisplayVersion(InfoResponse info)
+    public void DisplayVersion(ApplicationInfo info)
     {
-      Console.WriteLine($"{info.app} v{info.version}");
+      Console.WriteLine($"{info.Name} v{info.Version}");
       Console.WriteLine();
     }
 
@@ -18,10 +18,10 @@ namespace BigfootClassinator
 
     public void DisplayClassination(Classination classination)
     {
-      Console.Write($"{classination.class_a},");
-      Console.Write($"{classination.class_b},");
-      Console.Write($"{classination.class_c},");
-      Console.Write($"{classination.selected}");
+      Console.Write($"{classination.ClassA},");
+      Console.Write($"{classination.ClassB},");
+      Console.Write($"{classination.ClassC},");
+      Console.Write($"{classination.Selected}");
       Console.WriteLine();
     }
   }
