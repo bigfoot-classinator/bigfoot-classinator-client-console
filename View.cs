@@ -32,6 +32,7 @@ namespace BigfootClassinator
     public void DisplayVersion(ApplicationInfo info)
     {
       Console.WriteLine($"{info.Name} v{info.Version}");
+      Console.WriteLine($"{info.Attribution}");
       Console.WriteLine();
     }
 

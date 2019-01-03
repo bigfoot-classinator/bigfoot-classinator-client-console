@@ -9,5 +9,8 @@ namespace BigfootClassinator
 
     [JsonProperty(PropertyName = "version")]
     public string Version { get; set; }
+
+    [JsonProperty(PropertyName = "attribution")]
+    public string Attribution { get; set; }
   }
 }
