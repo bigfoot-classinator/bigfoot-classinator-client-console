@@ -12,7 +12,7 @@ namespace BigfootClassinator
       string sightingText = Console.ReadLine();
       while (sightingText != null)
       {
-        sightings.Add(new Sighting() { Text =sightingText });
+        sightings.Add(new Sighting() { Text = sightingText });
         sightingText = Console.ReadLine();
       }
 
