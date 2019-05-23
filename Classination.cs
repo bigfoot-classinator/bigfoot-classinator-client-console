@@ -10,9 +10,6 @@ namespace BigfootClassinator
     [JsonProperty(PropertyName = "class_b")]
     public double ClassB { get; set; }
 
-    [JsonProperty(PropertyName = "class_c")]
-    public double ClassC { get; set; }
-
     [JsonProperty(PropertyName = "selected")]
     public string Selected { get; set; }
   }

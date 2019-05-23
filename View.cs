@@ -1,22 +1,29 @@
 using System;
 using System.IO;
 using System.Collections.Generic;
+using CsvHelper;
 
 namespace BigfootClassinator
 {
   class View
   {
-    public Sighting[] ReadSightings()
+    public IEnumerable<Sighting> ReadSightings()
     {
-      List<Sighting> sightings = new List<Sighting>();
+      var sightings = new StringWriter();
+
       string sightingText = Console.ReadLine();
       while (sightingText != null)
       {
-        sightings.Add(new Sighting() { Text = sightingText });
+        sightings.WriteLine(sightingText);
         sightingText = Console.ReadLine();
       }
 
-      return sightings.ToArray();
+      var reader = new StringReader(sightings.ToString());
+      var csv = new CsvReader(reader);
+      csv.Configuration.PrepareHeaderForMatch = (string header, int index) => header.ToLower();
+      var records = csv.GetRecords<Sighting>();
+
+      return records;
     }
 
     public void DisplayHelp()
@@ -38,14 +45,13 @@ namespace BigfootClassinator
 
     public void DisplayClassinationTitles()
     {
-      Console.WriteLine("Class A,Class B,Class C,Selected,Sighting");
+      Console.WriteLine("Class A,Class B,Selected,Sighting");
     }
 
     public void DisplayClassination(ClassinationAndSighting classination)
     {
       Console.Write($"{classination.Classination.ClassA},");
       Console.Write($"{classination.Classination.ClassB},");
-      Console.Write($"{classination.Classination.ClassC},");
       Console.Write($"{classination.Classination.Selected},");
       Console.Write($"\"{classination.Sighting.Replace("\"", "\\\"")}\"");
       Console.WriteLine();
