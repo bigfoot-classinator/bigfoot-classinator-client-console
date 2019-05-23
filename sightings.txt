@@ -1,4 +1,4 @@
 latitude,longitude,text
 39.561146,-82.196382,"I saw bigfoot in the woods."
 40.885055,-82.169518,"I found a large footprint, behind the woodshed."
-40.658340,-83.016423,"My dog heard a weird ""noise"" that, I think, was ""bigfoot"".
+40.658340,-83.016423,"My dog heard a weird ""noise"" that, I think, was ""bigfoot""."
