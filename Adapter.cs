@@ -11,8 +11,7 @@ namespace BigfootClassinator
     private static readonly HttpClient client = new HttpClient();
 
     public Adapter() {
-      // client.BaseAddress = new Uri("http://bigfoot-classinator.herokuapp.com");
-      client.BaseAddress = new Uri("http://localhost:5000");
+      client.BaseAddress = new Uri("http://bigfoot-classinator.herokuapp.com");
       client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
     }
 
