@@ -11,11 +11,11 @@ namespace BigfootClassinator
     {
       var sightings = new StringWriter();
 
-      string sightingText = Console.ReadLine();
-      while (sightingText != null)
+      string line = Console.ReadLine();
+      while (line != null)
       {
-        sightings.WriteLine(sightingText);
-        sightingText = Console.ReadLine();
+        sightings.WriteLine(line);
+        line = Console.ReadLine();
       }
 
       var reader = new StringReader(sightings.ToString());
